@@ -4,8 +4,9 @@
     android:layout_height="match_parent">
 
     <Button
+        android:id="@+id/create_txt_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/action_create_folder" />
+        android:text="@string/action_create_txt" />
 
 </LinearLayout>
