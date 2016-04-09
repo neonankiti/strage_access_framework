@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">StrageFramewok</string>
     <string name="title_folder_create">フォルダ作成</string>
+    <string name="action_create_folder">フォルダを作成する。</string>
 </resources>
