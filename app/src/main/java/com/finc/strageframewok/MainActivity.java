@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.transition_to_folder_creation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, FolderCreateActivity.class));
+                startActivity(new Intent(MainActivity.this, FileCreateActivity.class));
             }
         });
 

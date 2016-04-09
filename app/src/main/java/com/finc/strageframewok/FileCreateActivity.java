@@ -16,14 +16,14 @@ import java.io.OutputStreamWriter;
 /**
  * This is {@link android.app.Activity} for folder creation.
  */
-public class FolderCreateActivity extends AppCompatActivity {
+public class FileCreateActivity extends AppCompatActivity {
 
     private static final int WRITE_REQUEST_CODE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_folder_create);
+        setContentView(R.layout.activity_file_create);
 
         findViewById(R.id.create_txt_button).setOnClickListener(new View.OnClickListener() {
             @Override
