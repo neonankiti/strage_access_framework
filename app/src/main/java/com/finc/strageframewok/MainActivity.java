@@ -10,6 +10,7 @@ import android.os.ParcelFileDescriptor;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import java.io.FileDescriptor;
@@ -24,7 +25,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        showDocumentPicker();
+        // transition to creation of folder in android device.
+        findViewById(R.id.transition_to_folder_creation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, FolderCreateActivity.class));
+            }
+        });
+
+        // pick image from document.
+        findViewById(R.id.pick_image_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDocumentPicker();
+            }
+        });
     }
 
     private void showDocumentPicker() {

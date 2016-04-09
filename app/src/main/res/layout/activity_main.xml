@@ -15,4 +15,16 @@
         android:layout_height="wrap_content"
         tools:src="@mipmap/ic_launcher" />
 
+    <Button
+        android:id="@+id/transition_to_folder_creation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="フォルダ作成画面に移動する" />
+
+    <Button
+        android:id="@+id/pick_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="イメージをドキュメントからピックする。" />
+
 </RelativeLayout>
