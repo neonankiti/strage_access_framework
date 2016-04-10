@@ -151,7 +151,14 @@ public class CustomDocumentProvider extends DocumentsProvider {
 
     @Override
     public ParcelFileDescriptor openDocument(String documentId, String mode, CancellationSignal signal) throws FileNotFoundException {
-        return null;
+        File file = new File(getContext().getFilesDir().getName() + "/" + documentId);
+
+        boolean isWritten = (mode.indexOf("w") != -1);
+        int accessMode = ParcelFileDescriptor.MODE_READ_ONLY;
+        if (isWritten) {
+            accessMode = ParcelFileDescriptor.MODE_READ_WRITE;
+        }
+        return ParcelFileDescriptor.open(file, accessMode);
     }
 
     @Override
