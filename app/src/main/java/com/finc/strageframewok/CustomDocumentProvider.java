@@ -118,7 +118,35 @@ public class CustomDocumentProvider extends DocumentsProvider {
 
     @Override
     public Cursor queryChildDocuments(String parentDocumentId, String[] projection, String sortOrder) throws FileNotFoundException {
-        return null;
+        MatrixCursor cursor = new MatrixCursor(resolveDocumentProjection(projection));
+
+        String parentFilePath = getContext().getFilesDir().getName() + "/" + parentDocumentId;
+        File parentFile = new File(parentFilePath);
+        for (File file : parentFile.listFiles()) {
+            // check if the file is directory or file
+            // and diverge the cursor row.
+            DocumentObject document;
+            String documentId = parentDocumentId + "/" + file.getName();
+            if (file.isDirectory()) {
+                document = new DocumentObject(
+                        documentId,
+                        file.getName(),
+                        Document.MIME_TYPE_DIR,
+                        Integer.MAX_VALUE,
+                        Document.FLAG_DIR_SUPPORTS_CREATE
+                );
+            } else {
+                document = new DocumentObject(
+                        documentId,
+                        file.getName(),
+                        "text/plain",
+                        Integer.MAX_VALUE,
+                        Document.FLAG_SUPPORTS_WRITE
+                );
+            }
+            return getDocumentCursor(cursor, document);
+        }
+        return cursor;
     }
 
     @Override
@@ -166,6 +194,7 @@ public class CustomDocumentProvider extends DocumentsProvider {
         return cursor;
     }
 
+    // class for creating specified object for document.
     private static class DocumentObject {
 
         private final String documentId;
