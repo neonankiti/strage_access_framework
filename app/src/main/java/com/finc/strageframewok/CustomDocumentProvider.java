@@ -120,8 +120,12 @@ public class CustomDocumentProvider extends DocumentsProvider {
     public Cursor queryChildDocuments(String parentDocumentId, String[] projection, String sortOrder) throws FileNotFoundException {
         MatrixCursor cursor = new MatrixCursor(resolveDocumentProjection(projection));
 
-        String parentFilePath = getContext().getFilesDir().getName() + "/" + parentDocumentId;
+        String parentFilePath = getContext().getFilesDir().getPath() + "/" + parentDocumentId;
         File parentFile = new File(parentFilePath);
+        if (parentFile == null
+                || parentFile.length() == 0) {
+            return cursor;
+        }
         for (File file : parentFile.listFiles()) {
             // check if the file is directory or file
             // and diverge the cursor row.
@@ -146,12 +150,12 @@ public class CustomDocumentProvider extends DocumentsProvider {
             }
             return getDocumentCursor(cursor, document);
         }
-        return cursor;
+        return null;
     }
 
     @Override
     public ParcelFileDescriptor openDocument(String documentId, String mode, CancellationSignal signal) throws FileNotFoundException {
-        File file = new File(getContext().getFilesDir().getName() + "/" + documentId);
+        File file = new File(getContext().getFilesDir().getPath() + "/" + documentId);
 
         boolean isWritten = (mode.indexOf("w") != -1);
         int accessMode = ParcelFileDescriptor.MODE_READ_ONLY;
